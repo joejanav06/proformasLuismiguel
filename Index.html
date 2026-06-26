@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proforma Médica - Dr. Luis Miguel Torres Marroquín</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f172a; /* Slate 900 */
+            --secondary: #0d9488; /* Teal 600 */
+            --accent: #d97706; /* Amber 600 */
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+        }
+        .heading-font {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* Ocultar elementos y adaptar estilos para impresión */
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            body {
+                background-color: white;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .print-border-none {
+                border: none !important;
+                background-color: transparent !important;
+                appearance: none !important;
+                -webkit-appearance: none !important;
+                padding: 0 !important;
+                color: #0f172a !important;
+                font-weight: 600;
+            }
+            .print-container {
+                box-shadow: none !important;
+                padding: 0 !important;
+                max-width: 100% !important;
+            }
+            .page-break {
+                page-break-before: always;
+            }
+        }
+    </style>
+</head>
+<body class="py-10 px-4 print:py-0 print:px-0">
+
+    <div class="max-w-4xl mx-auto bg-white shadow-xl rounded-xl p-8 md:p-12 print-container print:shadow-none print:rounded-none">
+        
+        <!-- Header -->
+        <header class="flex flex-col md:flex-row justify-between items-start md:items-center border-b-2 border-slate-200 pb-6 mb-8 gap-4">
+            <div class="flex items-center gap-4">
+                <div>
+                    <h1 class="text-2xl md:text-3xl font-bold text-slate-900 heading-font">Dr. Luis Miguel Torres</h1>
+                    <p class="text-sm font-medium text-teal-600 uppercase tracking-wider">Cirugía Bariátrica y Metabólica</p>
+                </div>
+            </div>
+            
+            <div class="flex flex-col items-end gap-3 w-full md:w-auto">
+                <button onclick="window.print()" class="no-print bg-slate-900 hover:bg-slate-800 text-white px-5 py-2 rounded-lg text-sm font-semibold transition-colors flex items-center gap-2 shadow-sm w-full justify-center md:w-auto">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.728 13.682A4.5 4.5 0 1 1 13.682 6.728M17.272 17.272A4.5 4.5 0 1 1 10.318 24.227m0-13.909A4.5 4.5 0 0 1 17.272 6.728M6.728 17.272A4.5 4.5 0 0 1 13.682 24.227" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5h10.5M6.75 16.5h10.5M4.5 12h15m-15-4.5h15M4.5 16.5h15" class="hidden"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.728 6.728h10.544a2.25 2.25 0 0 1 2.25 2.25v6.044a2.25 2.25 0 0 1-2.25 2.25H6.728a2.25 2.25 0 0 1-2.25-2.25V8.978a2.25 2.25 0 0 1 2.25-2.25Z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 6.75V3.375a1.125 1.125 0 0 1 1.125-1.125h8.25a1.125 1.125 0 0 1 1.125 1.125V6.75M16.5 17.25v3.375a1.125 1.125 0 0 1-1.125 1.125h-6.75a1.125 1.125 0 0 1-1.125-1.125V17.25" />
+                    </svg>
+                    Imprimir / Descargar PDF
+                </button>
+                <div class="text-right">
+                    <div class="flex items-center justify-end gap-2 text-sm">
+                        <span class="font-semibold text-slate-500">Proforma N°:</span>
+                        <input type="text" value="PF-2026-001" class="w-28 text-right font-bold text-slate-900 border border-slate-200 rounded px-2 py-1 print-border-none focus:outline-teal-500">
+                    </div>
+                    <div class="flex items-center justify-end gap-2 text-sm mt-1">
+                        <span class="font-semibold text-slate-500">Fecha:</span>
+                        <span id="current-date" class="font-medium text-slate-800"></span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Title -->
+        <div class="text-center mb-8">
+            <h2 class="text-2xl font-bold text-slate-900 heading-font tracking-wide">PROPUESTA DE PAQUETE QUIRÚRGICO</h2>
+            <p class="text-slate-500 mt-1">Programa Integral "Todo Incluido"</p>
+        </div>
+
+        <!-- Patient Form -->
+        <div class="bg-slate-50 rounded-xl p-6 mb-8 border border-slate-100 print:bg-transparent print:p-0 print:border-none">
+            <h3 class="text-lg font-bold text-slate-800 mb-4 border-b border-slate-200 pb-2 print:text-base">Datos del Paciente</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
+                
+                <div class="flex flex-col">
+                    <label class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">Nombre Completo</label>
+                    <input type="text" placeholder="Ej. Carlos Mendoza" class="border border-slate-300 rounded-md px-3 py-2 bg-white focus:outline-teal-500 print-border-none transition">
+                </div>
+
+                <div class="flex flex-col">
+                    <label class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">DNI / Documento</label>
+                    <input type="text" placeholder="Ej. 76543210" class="border border-slate-300 rounded-md px-3 py-2 bg-white focus:outline-teal-500 print-border-none transition">
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="flex flex-col">
+                        <label class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">Edad</label>
+                        <input type="number" placeholder="Ej. 35" class="border border-slate-300 rounded-md px-3 py-2 bg-white focus:outline-teal-500 print-border-none transition">
+                    </div>
+                    <div class="flex flex-col">
+                        <label class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">Sexo</label>
+                        <select id="sex-selector" onchange="calculatePrice()" class="border border-slate-300 rounded-md px-3 py-2 bg-white focus:outline-teal-500 print-border-none cursor-pointer">
+                            <option value="hombre">Hombre</option>
+                            <option value="mujer">Mujer</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex flex-col">
+                    <label class="text-xs font-bold text-teal-600 uppercase tracking-wide mb-1">Procedimiento Indicado</label>
+                    <select id="procedure-selector" onchange="calculatePrice()" class="border-2 border-teal-500 rounded-md px-3 py-2 bg-teal-50 font-semibold text-teal-900 focus:outline-teal-600 print-border-none cursor-pointer">
+                        <option value="manga">Manga Gástrica</option>
+                        <option value="bypass">Bypass Gástrico</option>
+                        <option value="balon">Balón Gástrico</option>
+                    </select>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Value Proposition -->
+        <div class="mb-8">
+            <h3 class="text-xl font-bold text-slate-900 mb-5 heading-font border-l-4 border-teal-500 pl-3">Beneficios del Programa Integral "Todo Incluido"</h3>
+            
+            <div class="space-y-4">
+                <!-- Fase 1 -->
+                <div class="bg-white border border-slate-200 rounded-lg p-5 print:p-2 print:border-b">
+                    <h4 class="font-bold text-slate-800 flex items-center gap-2 mb-3">
+                        <span class="bg-teal-100 text-teal-800 text-xs px-2 py-1 rounded font-bold">Fase 1</span>
+                        Quirúrgica y Médica
+                    </h4>
+                    <ul class="list-none space-y-2 text-sm text-slate-600">
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-teal-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            La cirugía bariátrica completa con los insumos y materiales quirúrgicos laparoscópicos de última generación.
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-teal-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Todos tus exámenes pre-quirúrgicos y la preparación nutricional previa son indispensables para tu seguridad.
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Fase 2 -->
+                <div class="bg-white border border-slate-200 rounded-lg p-5 print:p-2 print:border-b">
+                    <h4 class="font-bold text-slate-800 flex items-center gap-2 mb-3">
+                        <span class="bg-teal-100 text-teal-800 text-xs px-2 py-1 rounded font-bold">Fase 2</span>
+                        Seguimiento Anti-Reganancia (Acompañamiento Gratuito)
+                    </h4>
+                    <ul class="list-none space-y-2 text-sm text-slate-600">
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-teal-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Controles y citas por 1 año directamente con el Dr. Luis Miguel para monitorear tu evolución (un valor real de S/ 1,200 completamente libre de costo).
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-teal-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Asesoría y seguimiento 1 a 1 de Nutrición Especializada por 12 meses (valorizado en S/ 1,300, incluido).
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-teal-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Soporte, seguimiento y coaching integral con profesionales de la salud (valorizado en S/ 600, incluido).
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Fase 3 -->
+                <div class="bg-white border border-slate-200 rounded-lg p-5 print:p-2 print:border-b">
+                    <h4 class="font-bold text-slate-800 flex items-center gap-2 mb-3">
+                        <span class="bg-teal-100 text-teal-800 text-xs px-2 py-1 rounded font-bold">Fase 3</span>
+                        Tu Evolución Estética y Física
+                    </h4>
+                    <ul class="list-none space-y-2 text-sm text-slate-600">
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-teal-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Preparación física con rutinas deportivas personalizadas para evitar la flacidez (valorizado en S/ 600, incluido).
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-teal-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Suplementos Nutricionales por 6 meses completos indispensables para tu nutrición integral post-cirugía (valor de S/ 1,350, incluido).
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-teal-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Kit de 3 Fajas de remodelación corporal y 2 para hombres con técnicas de moldeo colombianas post-cirugía (valor de S/ 650, incluido).
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Fase 4 -->
+                <div class="bg-white border border-slate-200 rounded-lg p-5 print:p-2 print:border-b">
+                    <h4 class="font-bold text-slate-800 flex items-center gap-2 mb-3">
+                        <span class="bg-teal-100 text-teal-800 text-xs px-2 py-1 rounded font-bold">Fase 4</span>
+                        Red de Soporte VIP
+                    </h4>
+                    <ul class="list-none space-y-2 text-sm text-slate-600">
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-teal-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Convenios y tarifas exclusivas con nuestra Doctora en Psicología y Cirujanos Plásticos para cuando completes tu meta de pérdida de peso.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Automated Pricing Summary -->
+        <div class="bg-slate-900 text-white rounded-xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between shadow-lg mb-10 print:bg-slate-100 print:text-slate-900 print:border print:border-slate-300">
+            <div>
+                <h3 class="text-xl md:text-2xl font-bold heading-font text-teal-400 print:text-teal-700">Inversión Total del Programa</h3>
+                <p class="text-slate-300 text-sm mt-1 print:text-slate-600">Tarifa única que cubre de principio a fin sin costos ocultos.</p>
+            </div>
+            <div class="mt-4 md:mt-0 text-center md:text-right">
+                <div class="text-4xl md:text-5xl font-bold text-amber-500 print:text-slate-900 tracking-tight" id="display-price">
+                    S/ 10,990.00
+                </div>
+            </div>
+        </div>
+
+        <!-- Policies and Conditions -->
+        <div class="mb-12">
+            <h3 class="text-sm font-bold text-slate-800 uppercase tracking-wide mb-4 border-b border-slate-200 pb-2">Políticas y Condiciones del Servicio</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-600">
+                <div>
+                    <p class="mb-2"><strong class="text-slate-800">Validez:</strong> La proforma tiene una vigencia estricta de 30 días.</p>
+                    <p class="mb-2"><strong class="text-slate-800">Reserva:</strong> Separación de cupo con un monto mínimo de S/ 500.00 para seleccionar la fecha tentativa de la cirugía.</p>
+                    <p class="mb-2"><strong class="text-slate-800">Abono:</strong> Liquidación del 100% del saldo con 10 días de anticipación a la cirugía para dar pase a los análisis pre-quirúrgicos.</p>
+                </div>
+                <div>
+                    <p class="mb-2"><strong class="text-slate-800">Consultas Post-Cirugía:</strong> Consultas con el Dr. Luis Torres Marroquín, un año de forma presencial o virtual según disponibilidad. Consulta a la semana de operado, 1 mes, 3 meses, seis meses y al año. Las consultas adicionales a las del plan tienen un costo.</p>
+                    <p class="mb-2"><strong class="text-slate-800">Nutrición:</strong> Citas mensuales vía Zoom/Videollamada los primeros 6 meses, los próximos 6 meses ajustable a cada 2 meses según avance. Las consultas presenciales tienen un costo adicional.</p>
+                    <p><strong class="text-slate-800">Soporte:</strong> Atención de dudas 7 días a la semana de 9:00 a.m. a 7:00 p.m.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Signatures -->
+        <div class="grid grid-cols-2 gap-10 mt-16 pt-8 print:mt-10">
+            <div class="text-center">
+                <div class="border-b border-slate-400 w-3/4 mx-auto mb-2 h-16 relative">
+                    <!-- Area for physical signature -->
+                </div>
+                <p class="font-bold text-sm text-slate-800">Firma del Paciente</p>
+                <p class="text-xs text-slate-500">Conformidad de presupuesto</p>
+            </div>
+            <div class="text-center">
+                <div class="border-b border-slate-400 w-3/4 mx-auto mb-2 h-16 relative">
+                    <!-- Area for physical signature -->
+                </div>
+                <p class="font-bold text-sm text-slate-800">Coordinadora Quirúrgica</p>
+                <p class="text-xs text-slate-500">Representante del Centro Médico</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-16 pt-6 border-t border-slate-200 text-center text-xs text-slate-500">
+            <div class="flex flex-col md:flex-row justify-center items-center gap-2 md:gap-6 mb-2">
+                <span class="flex items-center gap-1">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                    +51 978 549 972
+                </span>
+                <span class="hidden md:inline text-slate-300">|</span>
+                <span class="flex items-center gap-1">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    Docluismi@gmail.com
+                </span>
+                <span class="hidden md:inline text-slate-300">|</span>
+                <span class="flex items-center gap-1">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    CMP: 034220 &nbsp; RNE: 020518
+                </span>
+            </div>
+            <p class="flex items-center justify-center gap-1">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                Avenida José Pardo 620, Urb. Cercado De Miraflores, Miraflores.
+            </p>
+        </footer>
+
+    </div>
+
+    <!-- Script for Dynamic Pricing and Initialization -->
+    <script>
+        // Set current date
+        const today = new Date();
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('current-date').textContent = today.toLocaleDateString('es-PE', options);
+
+        // Core logic for automated pricing
+        function calculatePrice() {
+            const procedure = document.getElementById('procedure-selector').value;
+            const sex = document.getElementById('sex-selector').value;
+            let price = 0;
+
+            if (procedure === 'manga') {
+                price = (sex === 'mujer') ? 11490 : 10990;
+            } else if (procedure === 'bypass') {
+                price = 13490; // Precio fijo para bypass
+            } else if (procedure === 'balon') {
+                price = 7490;  // Precio fijo para balón
+            }
+
+            // Formatear como moneda (Soles Peruanos)
+            const formattedPrice = new Intl.NumberFormat('es-PE', {
+                style: 'currency',
+                currency: 'PEN',
+                minimumFractionDigits: 2
+            }).format(price);
+
+            document.getElementById('display-price').textContent = formattedPrice;
+        }
+
+        // Initialize price on load
+        window.onload = calculatePrice;
+    </script>
+</body>
+</html>
