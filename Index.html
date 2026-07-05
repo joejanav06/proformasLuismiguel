@@ -127,6 +127,7 @@
                     <select id="procedure-selector" onchange="calculatePrice()" class="border-2 border-teal-500 rounded-md px-3 py-2 bg-teal-50 font-semibold text-teal-900 focus:outline-teal-600 print-border-none cursor-pointer">
                         <option value="manga">Manga Gástrica</option>
                         <option value="bypass">Bypass Gástrico</option>
+                        <option value="remanga">Re-manga</option>
                         <option value="balon">Balón Gástrico</option>
                     </select>
                 </div>
@@ -308,7 +309,9 @@
             if (procedure === 'manga') {
                 price = (sex === 'mujer') ? 11490 : 10990;
             } else if (procedure === 'bypass') {
-                price = 13490; // Precio fijo para bypass
+                price = 13990; // Modificado: Ahora es 13,990 soles para ambos sexos
+            } else if (procedure === 'remanga') {
+                price = 11990; // Agregado: Re-manga a 11,990 soles para ambos sexos
             } else if (procedure === 'balon') {
                 price = 7490;  // Precio fijo para balón
             }
